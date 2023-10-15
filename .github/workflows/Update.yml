@@ -29,14 +29,12 @@ jobs:
         wget https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u -O CCTV3.m3u &&  sed -i -n '/央视频道/,+1p' CCTV3.m3u
         wget https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6plus.m3u -O CCTV4.m3u &&  sed -i -n '/央视频道/,+1p' CCTV4.m3u
         wget https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/v6.m3u -O CCTV5.m3u &&  sed -i -n '/央视频道/,+1p' CCTV5.m3u
-        wget https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn_cctv.m3u -O CCTV6.m3u
         cat CCTV1.m3u >> CCTV.m3u
         cat CCTV2.m3u >> CCTV.m3u
         cat CCTV3.m3u >> CCTV.m3u
         cat CCTV4.m3u >> CCTV.m3u
         cat CCTV5.m3u >> CCTV.m3u
-        cat CCTV6.m3u >> CCTV.m3u
-        rm -f CCTV1.m3u CCTV2.m3u CCTV3.m3u CCTV4.m3u CCTV5.m3u CCTV6.m3u
+        rm -f CCTV1.m3u CCTV2.m3u CCTV3.m3u CCTV4.m3u CCTV5.m3u
         sed -i '1i #EXTM3U' CCTV.m3u
         sed -i '/^\s*$/d' CCTV.m3u
         # 卫视源
