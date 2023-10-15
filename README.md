@@ -16,21 +16,20 @@
 
 播放列表的多个版本在分组方式上有所不同。
 
-### 主播放列表
+### 主列表
 播放列表包括除成人频道之外的所有已知频道
-
-CCTV：
-
 ```
-(http://viptv.work/iptv/CCTV.m3u
+http://viptv.work/iptv/IPTV.m3u
 ```
-### RAW
-播放列表包括除成人频道之外的所有已知频道
-
-CCTV：
-
+### RAW列表
+GITHUB RAW播放列表
 ```
-(http://viptv.work/iptv/CCTV.m3u
+https://raw.githubusercontent.com/viptv-work/iptv/main/IPTV.m3u
+```
+### RAW列表
+GITHUB RAW播放列表
+```
+https://cdn.jsdelivr.net/gh/viptv-work/iptv/IPTV.m3u
 ```
 ## 节目单
 
