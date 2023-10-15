@@ -16,7 +16,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3 
       with:
-        ref:  upstream
         token: ${{ secrets.WORKFLOW_TOKEN }}
     - name: GetTime
       id: date
