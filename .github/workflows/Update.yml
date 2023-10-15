@@ -15,7 +15,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3 
+      id: create-app-token
       with:
+        app_id: ${{ secrets.APP_ID }}
+        private_key: ${{ secrets.APP_PRIVATE_KEY }}
         token: ${{ secrets.WORKFLOW_TOKEN }}
     - name: GetTime
       id: date
@@ -98,16 +101,15 @@ jobs:
         # 节目源
         rm -f EPG.xml && wget https://epg.112114.xyz/pp.xml -O EPG.xml
         
-        # README
-        echo "✯ Auto Update IPTV Data  at ${{ steps.date.outputs.update-time }} ✯" > README.md
-    - name: Clean
-      run: |
-        git config --local user.email "2236639958@qq.com"
-        git config --local user.name "qq2236629958"
-        git checkout --orphan latest_branch
-        git add -A
-        git commit -am "GitHub Actions Crawler IPTV Data at ${{ steps.date.outputs.update-time }}"
-        git branch -D main
-        git branch -m main
-    - name: Push
-      run: git push -f origin main
+    - name: deploy to iptv-org/api
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          repository-name: viptv-work/iptv
+          branch: gh-pages
+          folder: .gh-pages
+          token: ${{ steps.create-app-token.outputs.token }}
+          git-config-name: qq2236629958
+          git-config-email: 2236639958@qq.com
+          commit-message: 'GitHub Actions [Bot] Deploy to viptv-work/iptv IPTV Data at ${{ steps.date.outputs.update-time }}'
+          clean: true
+   
