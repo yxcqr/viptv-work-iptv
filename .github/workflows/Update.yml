@@ -110,4 +110,4 @@ jobs:
         git branch -D gh-pages
         git branch -m gh-pages
     - name: Push
-      run: git push -f origin gh-pages
+      run: git push -u origin gh-pages
