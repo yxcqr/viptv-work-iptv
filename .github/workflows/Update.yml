@@ -52,13 +52,6 @@ jobs:
         rm -f WSTV1.m3u WSTV2.m3u WSTV3.m3u WSTV4.m3u WSTV5.m3u
         sed -i '1i #EXTM3U' WSTV.m3u
         sed -i '/^\s*$/d' WSTV.m3u
-
-        # cntv源
-        rm -f CNTV.m3u && touch CNTV.m3u
-        wget https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u -O CNTV1.m3u
-        cat CNTV1.m3u >> CNTV.m3u
-        rm -f CNTV1.m3u
-        sed -i '/^\s*$/d' CNTV.m3u
         
         # NewTV  
         rm -f NEWTV.m3u && touch NEWTV.m3u
