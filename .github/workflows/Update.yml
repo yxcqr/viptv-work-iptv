@@ -15,8 +15,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3 
-      with:
-          token: ${{ steps.date.outputs.token }}
+       with:
+        ref:  upstream
+        token: ${{ secrets.WORKFLOW_TOKEN }}
     - name: GetTime
       id: date
       run: echo "update-time=$(date +'%Y-%m-%d %H:%M:%S CST')" >> "$GITHUB_OUTPUT" 
