@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3 
-       with:
+      with:
         ref:  upstream
         token: ${{ secrets.WORKFLOW_TOKEN }}
     - name: GetTime
