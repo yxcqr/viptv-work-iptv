@@ -99,7 +99,7 @@ jobs:
         rm -f EPG.xml && wget https://epg.112114.xyz/pp.xml -O EPG.xml
         
         # README
-        echo "✯ Auto Update IPTV Data  at ${{ steps.date.outputs.update-time }} ✯" > README.md
+        
     - name: Clean
       run: |
         git config --local user.email "2236639958@qq.com"
@@ -107,7 +107,7 @@ jobs:
         git checkout --orphan latest_branch
         git add -A
         git commit -am "GitHub Actions Crawler IPTV Data at ${{ steps.date.outputs.update-time }}"
-        git branch -D gh-pages
-        git branch -m gh-pages
+        git branch -D main
+        git branch -m main
     - name: Push
-      run: git push -u origin gh-pages
+      run: git push -u origin main
