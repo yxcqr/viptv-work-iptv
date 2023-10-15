@@ -4,7 +4,7 @@ on:
   watch:
     types: [started]
   schedule:
-    - cron: '30 5,17 * * *' 
+    - cron: 0,30 * * * *
 
 env:
   TZ: Asia/Shanghai
@@ -14,15 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3 
-      id: create-app-token
-      with:
-        app_id: ${{ secrets.APP_ID }}
-        private_key: ${{ secrets.APP_PRIVATE_KEY }}
-        token: ${{ secrets.WORKFLOW_TOKEN }}
+      uses: actions/checkout@v3
+
     - name: GetTime
       id: date
       run: echo "update-time=$(date +'%Y-%m-%d %H:%M:%S CST')" >> "$GITHUB_OUTPUT" 
+
     - name: Update
       run: |
         # 央视源
@@ -101,15 +98,16 @@ jobs:
         # 节目源
         rm -f EPG.xml && wget https://epg.112114.xyz/pp.xml -O EPG.xml
         
-    - name: deploy to iptv-org/api
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          repository-name: viptv-work/iptv
-          branch: gh-pages
-          folder: .gh-pages
-          token: ${{ steps.create-app-token.outputs.token }}
-          git-config-name: qq2236629958
-          git-config-email: 2236639958@qq.com
-          commit-message: 'GitHub Actions [Bot] Deploy to viptv-work/iptv IPTV Data at ${{ steps.date.outputs.update-time }}'
-          clean: true
-   
+        # README
+        echo "✯ Auto Update IPTV Data  at ${{ steps.date.outputs.update-time }} ✯" > README.md
+    - name: Clean
+      run: |
+        git config --local user.email "2236639958@qq.com"
+        git config --local user.name "qq2236629958"
+        git checkout --orphan latest_branch
+        git add -A
+        git commit -am "GitHub Actions Crawler IPTV Data at ${{ steps.date.outputs.update-time }}"
+        git branch -D gh-pages
+        git branch -m gh-pages
+    - name: Push
+      run: git push -f origin gh-pages
